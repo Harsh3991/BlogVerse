@@ -1,4 +1,5 @@
 const Blog = require('../model/Bolgs');
+const Comment = require('../model/Comment');
 
 // Get all blogs
 const getAllBlogs = async (req, res) => {
@@ -72,10 +73,33 @@ const deleteBlog = async (req, res) => {
   }
 };
 
+const createComment = async (req, res) => {
+  const { comment, posted_by, blog } = req.body;
+  const newComment = new Comment({ comment, posted_by, blog });
+
+  try {
+    const savedComment = await newComment.save();
+    res.status(201).json(savedComment);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+const getCommentsByBlog = async (req, res) => {
+  try {
+    const comments = await Comment.find({ blog: req.params.blogId }).populate('posted_by', 'name');
+    res.status(200).json(comments);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllBlogs,
   getBlogById,
   createBlog,
   updateBlog,
   deleteBlog,
+  createComment,
+  getCommentsByBlog,
 };
