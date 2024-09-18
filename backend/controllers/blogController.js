@@ -1,5 +1,6 @@
 const Blog = require('../model/Blog');
 const Comment = require('../model/Comment');
+const Like = require('../model/Like');
 
 // Get all blogs
 const getAllBlogs = async (req, res) => {

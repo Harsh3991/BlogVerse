@@ -1,29 +1,39 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/db");
-const User = require("./User");
-const Blog = require("./Blog");
+const mongoose = require('mongoose');
 
-const Like = sequelize.define("Like", {
-    userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: User,
-            key: 'id'
-        }
-    },
-    blogId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Blog,
-            key: "id"
-        }
-    },
-    like: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-    }
+const blogSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  small_description: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  img: {
+    type: String,
+    required: true,
+  },
+  posted_by: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  dislikes: {
+    type: Number,
+    default: 0,
+  },
+}, {
+  timestamps: true,
 });
 
-module.exports = Like;
+const Blog = mongoose.model('Blog', blogSchema);
+
+module.exports = Blog;
