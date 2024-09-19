@@ -12,5 +12,6 @@ router.get('/:blogId/comments', blogController.getCommentsByBlog);
 router.post('/:id/like', blogController.likeBlog);
 router.post('/:id/dislike', blogController.dislikeBlog);
 router.get('/:blogId/likes', blogController.getLikesAndDislikes);
+router.get('/search', blogController.searchBlogs);
 
 module.exports = router;
