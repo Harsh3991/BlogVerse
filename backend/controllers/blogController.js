@@ -137,6 +137,21 @@ const getLikesAndDislikes = async (req, res) => {
   }
 };
 
+const searchBlogs = async (req, res) => {
+  const { query } = req.query;
+  try {
+    const blogs = await Blog.find({
+      $or: [
+        { title: { $regex: query, $options: 'i' } },
+        { content: { $regex: query, $options: 'i' } },
+      ],
+    });
+    res.status(200).json(blogs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllBlogs,
   getBlogById,
@@ -148,4 +163,5 @@ module.exports = {
   likeBlog,
   dislikeBlog,
   getLikesAndDislikes,
+  searchBlogs,
 };
