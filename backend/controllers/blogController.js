@@ -1,6 +1,8 @@
 const Blog = require('../model/Blog');
 const Comment = require('../model/Comment');
 const Like = require('../model/Like');
+const supabase = require('../config/supabaseClient');
+const { v4: uuidv4 } = require('uuid');
 
 // Get all blogs
 const getAllBlogs = async (req, res) => {
@@ -152,6 +154,37 @@ const searchBlogs = async (req, res) => {
   }
 };
 
+
+const uploadImage = async (req, res) => {
+  const { image } = req.files; // Assuming you're using a middleware like express-fileupload
+
+  if (!image) {
+    return res.status(400).json({ message: 'No image file uploaded' });
+  }
+
+  const imageName = `${uuidv4()}-${image.name}`;
+
+  try {
+    const { data, error } = await supabase.storage
+      .from('images')
+      .upload(imageName, image.data, {
+        cacheControl: '3600',
+        upsert: false,
+      });
+
+    if (error) {
+      throw error;
+    }
+
+    const { publicURL } = supabase.storage.from('images').getPublicUrl(imageName);
+
+    res.status(200).json({ imageUrl: publicURL });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 module.exports = {
   getAllBlogs,
   getBlogById,
@@ -164,4 +197,5 @@ module.exports = {
   dislikeBlog,
   getLikesAndDislikes,
   searchBlogs,
+  uploadImage,
 };
