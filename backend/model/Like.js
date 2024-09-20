@@ -1,39 +1,24 @@
 const mongoose = require('mongoose');
 
-const blogSchema = new mongoose.Schema({
-  title: {
-    type: String,
+const likeSchema = new mongoose.Schema({
+  blog: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Blog',
     required: true,
   },
-  small_description: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-  img: {
-    type: String,
-    required: true,
-  },
-  posted_by: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  likes: {
-    type: Number,
-    default: 0,
-  },
-  dislikes: {
-    type: Number,
-    default: 0,
+  like: {
+    type: Boolean,
+    required: true,
   },
 }, {
   timestamps: true,
 });
 
-const Blog = mongoose.model('Blog', blogSchema);
+const Like = mongoose.model('Like', likeSchema);
 
-module.exports = Blog;
+module.exports = Like;
