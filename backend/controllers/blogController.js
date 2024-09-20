@@ -156,18 +156,19 @@ const searchBlogs = async (req, res) => {
 
 
 const uploadImage = async (req, res) => {
-  const { image } = req.files; // Assuming you're using a middleware like express-fileupload
+  const { img } = req.files;
+  // console.log(req) 
 
-  if (!image) {
+  if (!img) {
     return res.status(400).json({ message: 'No image file uploaded' });
   }
 
-  const imageName = `${uuidv4()}-${image.name}`;
+  const imageName = `${uuidv4()}-${img.name}`;
 
   try {
     const { data, error } = await supabase.storage
       .from('images')
-      .upload(imageName, image.data, {
+      .upload(imageName, img.data, {
         cacheControl: '3600',
         upsert: false,
       });
@@ -176,9 +177,9 @@ const uploadImage = async (req, res) => {
       throw error;
     }
 
-    const { publicURL } = supabase.storage.from('images').getPublicUrl(imageName);
+    const publicURL  = supabase.storage.from('images').getPublicUrl(data.path);
 
-    res.status(200).json({ imageUrl: publicURL });
+    res.status(200).json({ imageUrl: publicURL.data.publicURL });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
