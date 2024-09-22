@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../model/User');
+const Blog = require('../model/Blog');
 
 // Get all users
 const getAllUsers = async (req, res) => {
@@ -116,6 +117,37 @@ const loginUser = async (req, res) => {
   }
 };
 
+// Update user profile
+const updateProfile = async (req, res) => {
+  const { bio } = req.body;
+  const userId = req.user.id;
+
+  try {
+    const user = await User.findByIdAndUpdate(userId, { bio }, { new: true });
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Get user profile along with their blog posts
+const getUserProfile = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findById(userId).select('-password');
+    const blogs = await Blog.find({ posted_by: userId });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ user, blogs });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 
 module.exports = {
   registerUser,
@@ -125,4 +157,6 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  updateProfile,
+  getUserProfile,
 };
