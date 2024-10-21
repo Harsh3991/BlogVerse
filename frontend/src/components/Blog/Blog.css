@@ -1,33 +1,137 @@
 /* src/components/Blog/Blog.css */
+
+/* Blog List Styles */
 .blog-list {
-    padding: 20px;
+  padding: 20px;
+}
+
+.blog-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.blog-list li {
+  display: flex;
+  align-items: center;
+  background-color: rgb(230, 230, 230);
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 80%; /* Increase the width of the list item */
+  margin: 0 auto; /* Center the list item */
+}
+
+.blog-list img {
+  width: 150px; /* Set a fixed width for the image */
+  height: 100px; /* Set a fixed height for the image */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+  margin-right: 20px; /* Add some space between the image and the text */
+}
+
+.blog-list .blog-content {
+  flex: 1; /* Allow the text content to take up the remaining space */
+}
+
+/* Create Blog Styles */
+.create-blog {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-blog h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.create-blog form {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-blog form div {
+  margin-bottom: 15px;
+}
+
+.create-blog form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.create-blog form input,
+.create-blog form textarea {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.create-blog form textarea {
+  height: 250px; /* Adjust the height to display 2-3 paragraphs */
+  width: 550px;
+}
+
+.create-blog form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-blog form button:hover {
+  background-color: #0056b3;
+}
+
+.create-blog .error {
+  color: red;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .create-blog {
+    padding: 15px;
   }
-  
-  .blog-list ul {
-    list-style-type: none;
-    padding: 0;
+
+  .create-blog h2 {
+    font-size: 24px;
   }
-  
-  .blog-list li {
-    display: flex;
-    align-items: center;
-    background-color: rgb(230, 230, 230);
-    margin-bottom: 20px;
+
+  .create-blog form button {
+    font-size: 14px;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    width: 80%; /* Increase the width of the list item */
-    margin: 0 auto; /* Center the list item */
   }
-  
-  .blog-list img {
-    width: 150px; /* Set a fixed width for the image */
-    height: 100px; /* Set a fixed height for the image */
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-    margin-right: 20px; /* Add some space between the image and the text */
+
+  .create-blog form textarea {
+    height: 150px; /* Adjust the height for smaller screens */
   }
-  
-  .blog-list .blog-content {
-    flex: 1; /* Allow the text content to take up the remaining space */
+}
+
+@media (max-width: 480px) {
+  .create-blog {
+    padding: 10px;
   }
+
+  .create-blog h2 {
+    font-size: 20px;
+  }
+
+  .create-blog form button {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .create-blog form textarea {
+    height: 120px; /* Adjust the height for smaller screens */
+  }
+}
