@@ -1,3 +1,4 @@
+// src/components/Auth/Profile.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Auth.css';
@@ -49,7 +50,7 @@ function Profile() {
     <div className="profile-container">
       <nav className="navbar">
         <button onClick={() => window.history.back()}>Back</button>
-        <button onClick={() => window.location.href = '/write'}>Write</button>
+        <button onClick={() => window.location.href = '/create-blog'}>Write</button>
       </nav>
       <div className="profile-header">
         <img src="https://via.placeholder.com/150" alt="Profile" className="profile-image" />
