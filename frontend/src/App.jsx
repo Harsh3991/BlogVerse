@@ -1,15 +1,14 @@
-import { useState } from 'react'
-import './App.css'
-import CreateBlog from './components/Blog/CreateBlog';
+// src/App.jsx
+import React from 'react';
+import './App.css';
+import AllRoutes from './AllRoutes';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    <CreateBlog/>
-    </>
-  )
+    <div className="App">
+      <AllRoutes />
+    </div>
+  );
 }
 
-export default App
+export default App;
