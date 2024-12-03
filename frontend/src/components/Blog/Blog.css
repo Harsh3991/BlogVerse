@@ -24,7 +24,7 @@
 }
 
 .blog-list img {
-  width: 150px; /* Set a fixed width for the image */
+  width: 100px; /* Set a fixed width for the image */
   height: 100px; /* Set a fixed height for the image */
   object-fit: cover; /* Ensure the image covers the area without distortion */
   margin-right: 20px; /* Add some space between the image and the text */
@@ -97,6 +97,35 @@
   margin-bottom: 15px;
 }
 
+/* Home Page Styles */
+.home {
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.search-bar input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  width: 300px;
+}
+
+.search-bar input::placeholder {
+  color: #aaa;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .create-blog {
@@ -114,6 +143,20 @@
 
   .create-blog form textarea {
     height: 150px; /* Adjust the height for smaller screens */
+  }
+
+  .home {
+    padding: 10px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-bar input {
+    width: 100%;
+    margin-top: 10px;
   }
 }
 
