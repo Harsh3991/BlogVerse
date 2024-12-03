@@ -43,9 +43,9 @@
 
 body {
   background: linear-gradient(to bottom, #26B2DD, white);
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
+  height: 100vh;*/
+  margin: 0; 
 }
